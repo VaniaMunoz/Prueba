@@ -10,11 +10,144 @@
 			width: 800px;
 			height: 600px;
         }
+        .goku {
+            background-image: url("goku.png");
+            position: absolute;
+            width: 45px;
+            height: 60px;
+
+        }
+        .minicell {
+            background-image: url("minicell.png");
+            position: absolute;
+            width: 45px;
+            height: 55px;
+        }
+        .barragoku {
+            background-image: url("barravidagoku.png");
+            position: absolute;
+            width: 170px;
+            height: 22px;
+
+        }
+        .cuadrovidagoku {
+            background-image: url("cuadrovidagoku.png");
+            position: absolute;
+            width: 190px;
+            height: 30px;
+        }
+        .barraminicell {
+            background-image: url("barravidaminicell.png");
+            position: absolute;
+            width: 170px;
+            height: 22px;
+        }
+        .cuadrovidaminicell {
+            background-image: url("cuadrovidaminicell.png");
+            position: absolute;
+            width: 190px;
+            height: 30px;
+        }
+        .kamehameha {
+			position: absolute;
+			background-image: url("kamehameha.gif");
+			width: 2px;
+			height: 10px;
+		}
+
 
 </style>
-<div id="namek"></div>
+<div id="namek">
+    <div id="goku">
+        <div class="goku" style="left: 75px; top: 400px"></div>
+    </div>
+    <div id="barragoku"></div>
+        <div class="barragoku" style="left: 27px; top: 20px"></div>
+    <div id="cuadrovidagoku">
+        <div class="cuadrovidagoku" style="left: 10px; top: 15px"></div>
+    </div>
+    <div id="minicell">
+        <div class="minicell" style="left: 720px; top: 400px"></div>
+        <div id="barraminicell"></div>
+            <div class="barraminicell" style="left: 620px; top: 20px"></div>
+    <div id="cuadrovidaminicell">
+        <div class="cuadrovidaminicell" style="left: 615px; top: 15px"></div>
+    </div>
+    <div id="kamehameha"></div>
+</div>
 
+<script type="text/javascript">
 
-	</script>
+var goku= {
+		left: 75,
+		top: 400
+}
+
+var minicell = {
+		left: 720,
+        top: 400
+}
+
+var kamehameha = []
+
+	function drawGoku() {
+		content = "<div class='goku' style='left: "+goku.left+"px; top: "+goku.top+"px'></div>";
+		document.getElementById("goku").innerHTML = content;
+	}
+
+	function drawMinicell() {
+    document.getElementById("minicell").style.top = minicell.y * 40 + 'px'
+    document.getElementById("minicell").style.left = minicell.x * 40 + 'px'
+}
+		
+function drawKamehameha() {
+			content = "";
+			for(var i=0; i<missiles.length; i++) {
+				content += "<div class='kamehameha' style='left: "+kamehameha[i].left+"px; top: "+kamehameha[i].top+"px'></div>";
+			}
+			document.getElementById("kamehameha").innerHTML = content;
+		}
+
+function moveKamehameha() {
+	for(var i=0; i<kamehameha.length; i++) {
+    	kamehameha[i].left -= 10;
+		}
+	}
+
+    document.onkeydown = function(e) {
+		console.log(e);
+		if(e.keyCode == 37) {
+		    if(goku.left > 0) {
+			    goku.left -= 10;
+			//console.log("izquierda");
+			}
+		}
+		if(e.keyCode == 39) {
+		    if(goku.left < 1180) {
+			    goku.left += 10;
+			//console.log("derecha");
+			}
+		}
+		if(e.keyCode == 38) {
+		    if(goku.top < 570) {
+			    goku.top -= 10;				
+			//console.log("arriba");
+			}
+		}
+		if(e.keyCode == 40) {
+		    if(goku.top < 625) {
+			    goku.top += 10;
+			//console.log("abajo");
+		    }
+	    }
+        if(e.keyCode == 32) {
+				kamehameha.push({left: goku.left+75, top: goku.top});
+				drawKamehameha();
+			}
+        
+			drawGoku();
+		}
+
+</script>
 </body>
 </html>
